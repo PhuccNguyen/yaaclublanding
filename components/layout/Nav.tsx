@@ -1,0 +1,104 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Logo } from "./Logo";
+import { MagneticButton } from "./MagneticButton";
+import { NAV_LINKS, soonHref } from "@/lib/navigation";
+
+export function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 h-[72px] bg-[var(--yaa-cream)] transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_1px_0_var(--yaa-ink-15)]" : ""
+      }`}
+    >
+      <nav className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-5 md:px-10">
+        <a href="#top" aria-label="Yaa Club home" className="shrink-0">
+          <Logo variant="standard" orientation="horizontal" height={32} priority />
+        </a>
+
+        <ul className="hidden items-center gap-7 lg:flex">
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className="nav-link text-sm font-medium text-[var(--yaa-black)]"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href={soonHref("Log in")}
+            className="rounded-full border border-[var(--yaa-ink-15)] px-5 py-2.5 text-sm font-medium text-[var(--yaa-black)] transition-colors duration-300 hover:border-[var(--yaa-black)]"
+          >
+            Log in
+          </Link>
+          <MagneticButton variant="lime" magnetRadius={140} href="#download" className="!px-6 !py-2.5 !text-xs">
+            Get Started
+          </MagneticButton>
+        </div>
+
+        <button
+          type="button"
+          className="lg:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X size={26} /> : <Menu size={26} />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="border-t border-[var(--yaa-ink-15)] bg-[var(--yaa-cream)] px-5 pb-8 pt-4 lg:hidden">
+          <ul className="flex flex-col gap-4">
+            {NAV_LINKS.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="text-lg font-medium"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 flex gap-3">
+            <Link
+              href={soonHref("Log in")}
+              className="rounded-full border border-[var(--yaa-black)] px-6 py-3 text-sm font-medium"
+              onClick={() => setOpen(false)}
+            >
+              Log in
+            </Link>
+            <a
+              href="#download"
+              className="rounded-full bg-[var(--yaa-lime)] px-6 py-3 text-sm font-semibold"
+              onClick={() => setOpen(false)}
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

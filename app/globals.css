@@ -1,26 +1,264 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════
+   YAA CLUB — Design System
+   Brand palette locked to YAA_CLUB_BRANDGUIDELINES (B2).
+   This is the ONLY file allowed to contain hex values.
+   ═══════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary (Pantone 902 C / Black 6 C) */
+  --yaa-cream: #FAFFA2;
+  --yaa-black: #0A0A0A;
+
+  /* Secondary (Pantone 802 C / Warm Red C / 266 C) */
+  --yaa-lime: #D2FF00;
+  --yaa-red: #FF5722;
+  --yaa-purple: #635BCE;
+
+  /* Neutrals */
+  --yaa-off: #F6F5EE;
+  --yaa-white: #FFFFFF;
+  --yaa-ink-60: rgba(10, 10, 10, 0.6);
+  --yaa-ink-15: rgba(10, 10, 10, 0.15);
+  --yaa-ink-08: rgba(10, 10, 10, 0.08);
+  --yaa-cream-15: rgba(250, 255, 162, 0.15);
+
+  --background: var(--yaa-white);
+  --foreground: var(--yaa-black);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-yaa-cream: var(--yaa-cream);
+  --color-yaa-black: var(--yaa-black);
+  --color-yaa-lime: var(--yaa-lime);
+  --color-yaa-red: var(--yaa-red);
+  --color-yaa-purple: var(--yaa-purple);
+  --color-yaa-off: var(--yaa-off);
+  --font-display: var(--font-inter-tight), "Inter Tight", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════ Base ═══════════ */
+
+* {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
   }
 }
 
+html {
+  scroll-behavior: auto;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--yaa-white);
+  color: var(--yaa-black);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════ 3D depth utilities ═══════════ */
+
+.scene {
+  perspective: 1600px;
+}
+
+.tilt-phone {
+  transform: perspective(1600px) rotateY(-14deg) rotateX(5deg) rotateZ(1deg);
+  transform-style: preserve-3d;
+  box-shadow: -30px 40px 70px rgba(10, 10, 10, 0.22);
+}
+
+.float-card {
+  transform: perspective(1400px) rotateY(8deg) rotateX(3deg);
+  transform-style: preserve-3d;
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-3deg);
+  }
+}
+
+.hero-chip {
+  animation: soft-float 4.5s ease-in-out infinite;
+}
+
+.hero-chip-alt {
+  animation-duration: 5.5s;
+  animation-delay: -2s;
+}
+
+/* Interactive tilt driven by GSAP writing --rx / --ry (see Tilt.tsx) */
+.tilt-hover {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-phone,
+  .float-card,
+  .tilt-hover {
+    transform: none;
+  }
+}
+
+::selection {
+  background: var(--yaa-lime);
+  color: var(--yaa-black);
+}
+
+/* ═══════════ Typography ═══════════ */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ═══════════ Film grain (0.04) ═══════════ */
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+}
+
+/* ═══════════ Marquee ═══════════ */
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 32s linear infinite;
+}
+
+.marquee-left:hover {
+  animation-play-state: paused;
+}
+
+/* ═══════════ Custom cursor ═══════════ */
+
+.custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--yaa-black);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.hover {
+  width: 48px;
+  height: 48px;
+  background: var(--yaa-cream);
+  mix-blend-mode: difference;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
+/* ═══════════ Nav underline (grow from left) ═══════════ */
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--yaa-lime);
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ═══════════ Cards ═══════════ */
+
+.lift-card {
+  transition:
+    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lift-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(10, 10, 10, 0.08);
+}
+
+/* ═══════════ SplitText mask ═══════════ */
+
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+/* ═══════════ Reduced motion ═══════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-left {
+    animation: none;
+  }
+
+  .custom-cursor {
+    display: none;
+  }
 }
