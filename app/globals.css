@@ -18,6 +18,7 @@
 
   /* Neutrals */
   --yaa-off: #F6F5EE;
+  --yaa-sand: #E7E1D3;
   --yaa-white: #FFFFFF;
   --yaa-ink-60: rgba(10, 10, 10, 0.6);
   --yaa-ink-15: rgba(10, 10, 10, 0.15);
@@ -73,9 +74,8 @@ body {
 }
 
 .tilt-phone {
-  transform: perspective(1600px) rotateY(-14deg) rotateX(5deg) rotateZ(1deg);
+  transform: perspective(1800px) rotateY(-5deg) rotateX(2deg);
   transform-style: preserve-3d;
-  box-shadow: -30px 40px 70px rgba(10, 10, 10, 0.22);
 }
 
 .float-card {

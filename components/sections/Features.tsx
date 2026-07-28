@@ -3,6 +3,7 @@
 import { Compass, CalendarCheck, Megaphone, MessagesSquare, Download } from "lucide-react";
 import { MagneticButton } from "@/components/layout/MagneticButton";
 import { Reveal } from "@/components/ui/Reveal";
+import { Tilt } from "@/components/ui/Tilt";
 
 const FEATURES = [
   {
@@ -34,9 +35,8 @@ const FEATURES = [
 export function Features() {
   return (
     <section id="features" className="bg-[var(--yaa-white)]">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 md:px-10 lg:grid-cols-[1fr_1.9fr] lg:items-start lg:gap-16">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-6 py-20 md:px-10 lg:grid-cols-[1fr_1.9fr] lg:items-start lg:gap-16 lg:py-28">
         <Reveal>
-          <p className="eyebrow mb-5 text-[var(--yaa-ink-60)]">The App</p>
           <h2 className="font-display text-[clamp(32px,4vw,56px)] uppercase">
             Everything you need, all in one app.
           </h2>
@@ -53,18 +53,19 @@ export function Features() {
           </div>
         </Reveal>
 
-        <Reveal stagger={0.12} className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
-          {FEATURES.map((feature, i) => (
-            <div
-              key={feature.title}
-              className={`${i > 0 ? "lg:border-l lg:border-[var(--yaa-ink-15)] lg:pl-6" : ""}`}
-            >
-              <feature.icon size={26} className={feature.tone} aria-hidden="true" />
-              <h3 className="mt-5 font-display text-lg">{feature.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--yaa-ink-60)]">
-                {feature.copy}
-              </p>
-            </div>
+        <Reveal stagger={0.12} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((feature) => (
+            <Tilt key={feature.title} max={6} className="rounded-[20px]">
+              <div className="lift-card h-full rounded-[20px] border border-[var(--yaa-ink-15)] bg-[var(--yaa-white)] p-6">
+                <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--yaa-cream)]">
+                  <feature.icon size={26} className={feature.tone} aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-xl">{feature.title}</h3>
+                <p className="mt-2.5 text-[15px] leading-relaxed text-[var(--yaa-ink-60)]">
+                  {feature.copy}
+                </p>
+              </div>
+            </Tilt>
           ))}
         </Reveal>
       </div>

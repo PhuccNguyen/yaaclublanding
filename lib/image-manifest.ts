@@ -7,6 +7,9 @@ export const IMAGES = {
   heroAthlete: "/images/hero-01-athlete-left.jpg",
   heroRunner: "/images/hero-03-runner.jpg",
   heroEventCard: "/images/hero-04-eveninghoops-card.jpg",
+  /* Transparent cut-out hero figures (keyed from white studio by scripts/cutout-bg.mjs) */
+  heroWomanCut: "/images/hero-woman-cut.png",
+  heroRunnerCut: "/images/hero-runner-cut.png",
   evtPadel: "/images/weekend-padel-social.jpg",
   evtRun: "/images/sunrise-long-run.jpg",
   evtYoga: "/images/sunset-yoga-flow.jpg",
@@ -23,6 +26,7 @@ export const LOGOS = {
   lockupVerticalCream: "/logo/yaa-lockup-vertical-cream.png",
   lockupHorizontalCream: "/logo/yaa-lockup-horizontal-cream.png",
   iconCream: "/logo/yaa-icon-cream.png",
+  lockupVerticalLime: "/logo/yaa-lockup-vertical-lime.png",
 } as const;
 
 /* Intrinsic aspect ratios of the original marks (width / height). */

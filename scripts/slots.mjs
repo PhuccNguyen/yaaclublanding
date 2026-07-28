@@ -154,6 +154,39 @@ export const SLOTS = [
       NEGATIVE,
   },
   {
+    /* Cut-out hero figure (center). Transparent PNG so it floats on the cream hero. */
+    id: "HERO-WOMAN-CUT",
+    out: "public/images/hero-woman.png",
+    width: 1200,
+    height: 1600,
+    transparent: true,
+    prompt:
+      "Full-body studio cut-out of a Southeast Asian woman athlete in her late twenties, " +
+      "laughing with her head tilted back mid-joy, one hand holding a frosted white water " +
+      "bottle near her hip. Wardrobe: clean white sports bra crop top and warm " +
+      "terracotta/rust high-waist leggings, minimal jewelry. Dynamic candid posture, " +
+      "slight lean, natural gym lighting, soft shadow, 85mm f/2.0, editorial sports look, " +
+      "subtle film grain. Isolated on a fully TRANSPARENT background (PNG alpha); if " +
+      "transparency is unavailable use a pure flat #FFFFFF background with clean edges. " +
+      NEGATIVE,
+  },
+  {
+    /* Cut-out hero figure (right). Transparent PNG, dynamic sprint. */
+    id: "HERO-RUNNER-CUT",
+    out: "public/images/hero-runner.png",
+    width: 1200,
+    height: 1600,
+    transparent: true,
+    prompt:
+      "Full-body studio cut-out of a Southeast Asian man mid-sprint, full stride extension, " +
+      "leaning into the run, focused expression. Wardrobe: fitted black athletic tee, black " +
+      "running shorts, white-and-black running shoes. Frozen motion, crisp edges, natural " +
+      "daylight, soft contact shadow, 135mm f/2.8, editorial athletics look, subtle film " +
+      "grain. Isolated on a fully TRANSPARENT background (PNG alpha); if transparency is " +
+      "unavailable use a pure flat #FFFFFF background with clean edges. " +
+      NEGATIVE,
+  },
+  {
     id: "SOON-BG",
     out: "public/images/coming-soon-bg.jpg",
     width: 2560,

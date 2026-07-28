@@ -20,13 +20,15 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 h-[72px] bg-[var(--yaa-cream)] transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_1px_0_var(--yaa-ink-15)]" : ""
+      className={`fixed inset-x-0 top-0 z-50 h-[76px] bg-[var(--yaa-white)] transition-shadow duration-300 ${
+        scrolled
+          ? "shadow-[0_1px_0_var(--yaa-ink-15)]"
+          : "shadow-[0_1px_0_var(--yaa-ink-08)]"
       }`}
     >
-      <nav className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-5 md:px-10">
+      <nav className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-6 md:px-10">
         <a href="#top" aria-label="Yaa Club home" className="shrink-0">
-          <Logo variant="standard" orientation="horizontal" height={32} priority />
+          <Logo variant="standard" orientation="horizontal" height={40} priority />
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">
@@ -67,7 +69,7 @@ export function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-[var(--yaa-ink-15)] bg-[var(--yaa-cream)] px-5 pb-8 pt-4 lg:hidden">
+        <div className="border-t border-[var(--yaa-ink-15)] bg-[var(--yaa-white)] px-6 pb-8 pt-4 shadow-[0_12px_24px_var(--yaa-ink-08)] lg:hidden">
           <ul className="flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>

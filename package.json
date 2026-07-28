@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "prep:images": "node scripts/prepare-images.mjs",
-    "gen:images": "node scripts/generate-images.mjs"
+    "gen:images": "node scripts/generate-images.mjs",
+    "cutout": "node scripts/cutout-bg.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

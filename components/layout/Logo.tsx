@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { LOGOS, LOGO_RATIO } from "@/lib/image-manifest";
 
-type LogoVariant = "standard" | "inverted" | "icon";
+type LogoVariant = "standard" | "inverted" | "icon" | "lime";
 type LogoOrientation = "horizontal" | "vertical";
 
 interface LogoProps {
@@ -29,24 +29,29 @@ export function Logo({
 }: LogoProps) {
   const isIcon = variant === "icon";
   const inverted = variant === "inverted";
+  const isLime = variant === "lime";
 
-  const src = isIcon
-    ? inverted
-      ? LOGOS.iconCream
-      : LOGOS.icon
-    : orientation === "horizontal"
+  const src = isLime
+    ? LOGOS.lockupVerticalLime
+    : isIcon
       ? inverted
-        ? LOGOS.lockupHorizontalCream
-        : LOGOS.lockupHorizontal
-      : inverted
-        ? LOGOS.lockupVerticalCream
-        : LOGOS.lockupVertical;
+        ? LOGOS.iconCream
+        : LOGOS.icon
+      : orientation === "horizontal"
+        ? inverted
+          ? LOGOS.lockupHorizontalCream
+          : LOGOS.lockupHorizontal
+        : inverted
+          ? LOGOS.lockupVerticalCream
+          : LOGOS.lockupVertical;
 
-  const ratio = isIcon
-    ? LOGO_RATIO.icon
-    : orientation === "horizontal"
-      ? LOGO_RATIO.horizontal
-      : LOGO_RATIO.vertical;
+  const ratio = isLime
+    ? LOGO_RATIO.vertical
+    : isIcon
+      ? LOGO_RATIO.icon
+      : orientation === "horizontal"
+        ? LOGO_RATIO.horizontal
+        : LOGO_RATIO.vertical;
 
   const width = Math.round(height * ratio);
 

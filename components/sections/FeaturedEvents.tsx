@@ -78,14 +78,11 @@ function EventCard({ event, index }: { event: YaaEvent; index: number }) {
 export function FeaturedEvents() {
   return (
     <section id="events" className="bg-[var(--yaa-white)] pb-24 pt-4">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-4 text-[var(--yaa-ink-60)]">This Week</p>
-            <h2 className="font-display text-[clamp(30px,3.6vw,52px)] uppercase">
-              Featured Events
-            </h2>
-          </div>
+          <h2 className="font-display text-[clamp(30px,3.6vw,52px)] uppercase">
+            Featured Events
+          </h2>
           <Link
             href={soonHref("All Events")}
             className="nav-link inline-flex items-center gap-2 text-sm font-semibold"
