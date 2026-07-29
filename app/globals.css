@@ -74,7 +74,7 @@ body {
 }
 
 .tilt-phone {
-  transform: perspective(1800px) rotateY(-5deg) rotateX(2deg);
+  transform: perspective(1100px) rotateY(-16deg) rotateX(4deg) rotateZ(-3deg);
   transform-style: preserve-3d;
 }
 
@@ -102,21 +102,17 @@ body {
   animation-delay: -2s;
 }
 
-/* Interactive tilt driven by GSAP writing --rx / --ry (see Tilt.tsx) */
+/* Interactive tilt driven by GSAP writing --rx / --ry / --rz (see Tilt.tsx) */
 .tilt-hover {
-  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    rotateZ(var(--rz, 0deg));
   transform-style: preserve-3d;
   transition: box-shadow 0.3s ease;
   will-change: transform;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tilt-phone,
-  .float-card,
-  .tilt-hover {
-    transform: none;
-  }
-}
+/* Static 3D poses (resting tilt) are kept under reduced motion — they do not
+   animate. The cursor-driven tilt itself is disabled in JS (see Tilt.tsx). */
 
 ::selection {
   background: var(--yaa-lime);

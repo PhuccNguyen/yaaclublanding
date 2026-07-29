@@ -11,6 +11,8 @@ interface TiltProps {
   /** Resting tilt so the element reads 3D even before hover. */
   baseRx?: number;
   baseRy?: number;
+  /** Resting Z-roll (jaunty lean); not affected by the cursor. */
+  baseRz?: number;
 }
 
 /**
@@ -24,6 +26,7 @@ export function Tilt({
   max = 8,
   baseRx = 0,
   baseRy = 0,
+  baseRz = 0,
 }: TiltProps) {
   const ref = useRef<HTMLDivElement>(null);
   const setRx = useRef<((v: number) => void) | null>(null);
@@ -32,10 +35,10 @@ export function Tilt({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    gsap.set(el, { "--rx": `${baseRx}deg`, "--ry": `${baseRy}deg` });
+    gsap.set(el, { "--rx": `${baseRx}deg`, "--ry": `${baseRy}deg`, "--rz": `${baseRz}deg` });
     setRx.current = gsap.quickTo(el, "--rx", { duration: 0.5, ease: "power3.out" });
     setRy.current = gsap.quickTo(el, "--ry", { duration: 0.5, ease: "power3.out" });
-  }, [baseRx, baseRy]);
+  }, [baseRx, baseRy, baseRz]);
 
   function handleMove(e: React.MouseEvent) {
     const el = ref.current;

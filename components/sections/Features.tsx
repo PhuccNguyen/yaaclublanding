@@ -1,48 +1,47 @@
 "use client";
 
-import { Compass, CalendarCheck, Megaphone, MessagesSquare, Download } from "lucide-react";
+import { Search, CalendarDays, Users, UsersRound, Download } from "lucide-react";
 import { MagneticButton } from "@/components/layout/MagneticButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { Tilt } from "@/components/ui/Tilt";
 
 const FEATURES = [
   {
-    icon: Compass,
+    icon: Search,
     tone: "text-[var(--yaa-black)]",
     title: "Club Discovery",
-    copy: "Find clubs near you by sport, level and vibe. Preview before you join.",
+    copy: "Find the right clubs and communities for your passion.",
   },
   {
-    icon: CalendarCheck,
+    icon: CalendarDays,
     tone: "text-[var(--yaa-purple)]",
     title: "Sports Booking",
-    copy: "Book courts, classes and coaches in seconds. Pay once, play often.",
+    copy: "Book courts, venues and classes in just a few taps.",
   },
   {
-    icon: Megaphone,
+    icon: Users,
     tone: "text-[var(--yaa-red)]",
     title: "Event Management",
-    copy: "Create events, manage sign-ups and check members in from one screen.",
+    copy: "Create, promote and manage events with ease.",
   },
   {
-    icon: MessagesSquare,
-    tone: "text-[var(--yaa-black)]",
+    icon: UsersRound,
+    tone: "text-[var(--yaa-lime)]",
     title: "Community Hub",
-    copy: "Chat with your crew, share results and keep every season connected.",
+    copy: "Connect, chat and grow your community together.",
   },
 ];
 
 export function Features() {
   return (
     <section id="features" className="bg-[var(--yaa-white)]">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-6 py-20 md:px-10 lg:grid-cols-[1fr_1.9fr] lg:items-start lg:gap-16 lg:py-28">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 md:px-10 lg:grid-cols-[1fr_2fr] lg:items-center lg:gap-16 lg:py-24">
+        {/* ── Left · headline + download ── */}
         <Reveal>
-          <h2 className="font-display text-[clamp(32px,4vw,56px)] uppercase">
+          <h2 className="font-display text-[clamp(30px,3.6vw,52px)] uppercase leading-[0.98]">
             Everything you need, all in one app.
           </h2>
-          <p className="mt-5 max-w-[380px] text-base leading-relaxed text-[var(--yaa-ink-60)]">
-            Stop juggling group chats, spreadsheets and booking sites. Yaa Club
-            puts your whole sports life in your pocket.
+          <p className="mt-5 max-w-[340px] text-[15px] leading-relaxed text-[var(--yaa-ink-60)]">
+            Explore, connect and manage your sports life seamlessly.
           </p>
           <div className="mt-8">
             <MagneticButton variant="lime" href="#download">
@@ -53,19 +52,21 @@ export function Features() {
           </div>
         </Reveal>
 
-        <Reveal stagger={0.12} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* ── Right · four centred feature columns (line icons, no boxes) ── */}
+        <Reveal stagger={0.1} className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
           {FEATURES.map((feature) => (
-            <Tilt key={feature.title} max={6} className="rounded-[20px]">
-              <div className="lift-card h-full rounded-[20px] border border-[var(--yaa-ink-15)] bg-[var(--yaa-white)] p-6">
-                <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--yaa-cream)]">
-                  <feature.icon size={26} className={feature.tone} aria-hidden="true" />
-                </span>
-                <h3 className="font-display text-xl">{feature.title}</h3>
-                <p className="mt-2.5 text-[15px] leading-relaxed text-[var(--yaa-ink-60)]">
-                  {feature.copy}
-                </p>
-              </div>
-            </Tilt>
+            <div key={feature.title} className="group flex flex-col items-center px-2 text-center">
+              <feature.icon
+                size={30}
+                strokeWidth={1.8}
+                className={`${feature.tone} transition-transform duration-300 group-hover:-translate-y-1`}
+                aria-hidden="true"
+              />
+              <h3 className="mt-5 font-display text-lg">{feature.title}</h3>
+              <p className="mt-2 max-w-[190px] text-[13.5px] leading-relaxed text-[var(--yaa-ink-60)]">
+                {feature.copy}
+              </p>
+            </div>
           ))}
         </Reveal>
       </div>

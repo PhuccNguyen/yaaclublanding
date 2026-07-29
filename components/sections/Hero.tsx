@@ -186,9 +186,10 @@ export function Hero() {
           {/* Phone · centred on panel 1, clearly tilted to one side (not front-on) */}
           <Tilt
             baseRy={-22}
-            baseRx={5}
+            baseRx={9}
+            baseRz={-10}
             max={5}
-            className="absolute left-[12%] top-1/2 z-30 w-[27%] min-w-[214px] max-w-[262px] -translate-y-1/2 rounded-[40px] shadow-[-30px_38px_66px_rgba(10,10,10,0.32)]"
+            className="absolute left-[13%] top-1/2 z-30 w-[27%] min-w-[214px] max-w-[262px] -translate-y-1/2 rounded-[40px] shadow-[-40px_46px_80px_rgba(10,10,10,0.36)]"
           >
             <PhoneMockup />
           </Tilt>
