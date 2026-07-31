@@ -125,9 +125,9 @@ export function Hero() {
             ref={headlineRef}
             className="font-display text-[clamp(42px,5vw,74px)] uppercase opacity-0"
           >
-            <span className="block">More than a game.</span>
+            <span className="block">More than a game,</span>
             <span className="block">
-              It&apos;s a{" "}
+              it&apos;s a{" "}
               <span className="relative inline-block whitespace-nowrap">
                 <span className="hero-highlight absolute inset-x-[-2%] inset-y-[10%] z-0 block bg-[var(--yaa-lime)]" />
                 <span className="relative z-10">community.</span>

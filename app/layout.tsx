@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Yaa Club | Wellbeing that works",
   description:
-    "Discover clubs, join communities, book sports activities and organize events. Play. Connect. Grow. More than a game. It's a community.",
+    "Discover clubs, join communities, book sports activities and organize events. Play. Connect. Grow. More than a game, it's a community.",
   keywords: [
     "Yaa Club",
     "pickleball",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Yaa Club | Wellbeing that works",
-    description: "Play. Connect. Grow. More than a game. It's a community.",
+    description: "Play. Connect. Grow. More than a game, it's a community.",
     type: "website",
     locale: "en_US",
     siteName: "Yaa Club",

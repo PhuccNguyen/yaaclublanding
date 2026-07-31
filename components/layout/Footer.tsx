@@ -58,7 +58,7 @@ export function Footer() {
         <div className="flex flex-col items-start gap-5">
           <Logo variant="lime" height={112} />
           <p className="max-w-[230px] text-sm leading-relaxed text-[var(--yaa-cream)]/70">
-            More than a game. It&apos;s a community.
+            More than a game, it&apos;s a community.
           </p>
           <div className="flex gap-3">
             {[
