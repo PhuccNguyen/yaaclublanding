@@ -41,7 +41,7 @@ export function Roles() {
           {/* ── Left · headline + support + colour legend ── */}
           <div>
             <h2 className="font-display text-[clamp(28px,3.2vw,46px)] uppercase leading-[0.96]">
-              Built for every role in the sports ecosystem.
+              Built for every role in the sports ecosystem
             </h2>
             <p className="mt-5 max-w-[360px] text-[15px] leading-relaxed text-[var(--yaa-ink-60)]">
               One platform, three ways to play. Join in, run a club, or open

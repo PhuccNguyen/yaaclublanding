@@ -38,7 +38,7 @@ export function Features() {
         {/* ── Left · headline + download ── */}
         <Reveal>
           <h2 className="font-display text-[clamp(30px,3.6vw,52px)] uppercase leading-[0.98]">
-            Everything you need, all in one app.
+            Everything you need, all in one app
           </h2>
           <p className="mt-5 max-w-[340px] text-[15px] leading-relaxed text-[var(--yaa-ink-60)]">
             Explore, connect and manage your sports life seamlessly.
