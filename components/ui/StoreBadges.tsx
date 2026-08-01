@@ -15,10 +15,10 @@ export function StoreBadges({ scheme = "dark", className = "" }: StoreBadgesProp
   const stroke = scheme === "dark" ? "none" : "var(--yaa-cream)";
 
   const badgeClass =
-    "inline-flex h-12 items-center gap-2.5 rounded-xl px-4 transition-transform duration-300 hover:-translate-y-0.5";
+    "inline-flex h-10 lg:h-12 items-center gap-2 lg:gap-2.5 rounded-xl px-3 lg:px-4 transition-transform duration-300 hover:-translate-y-0.5";
 
   return (
-    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+    <div className={`flex flex-nowrap items-center gap-4 ${className}`}>
       <a
         href="#download"
         aria-label="Download on the App Store"

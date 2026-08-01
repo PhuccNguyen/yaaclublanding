@@ -73,7 +73,7 @@ export function MagneticButton({
     }
   }
 
-  const baseStyles = "magnetic-btn rounded-full px-8 py-4 font-display text-sm tracking-wide uppercase transition-colors";
+  const baseStyles = "magnetic-btn rounded-full px-4 py-2.5 text-[11px] tracking-widest lg:px-8 lg:py-4 lg:text-sm font-display tracking-wide uppercase transition-colors";
   
   const variantStyles = {
     filled: "bg-[var(--yaa-black)] text-[var(--yaa-cream)]",

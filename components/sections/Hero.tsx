@@ -140,20 +140,20 @@ export function Hero() {
             organize events, all in one place.
           </p>
 
-          <div className="hero-stagger mt-9 flex flex-wrap items-center gap-4">
+          <div className="hero-stagger mt-9 flex flex-nowrap items-center gap-3">
             <MagneticButton variant="lime" href="#events">
-              <span className="inline-flex items-center gap-2">
-                Explore Clubs <ArrowRight size={16} />
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                Explore Clubs <ArrowRight size={14} />
               </span>
             </MagneticButton>
             <MagneticButton variant="ghost" href="#roles">
-              <span className="inline-flex items-center gap-2">
-                For Organizers <ArrowRight size={16} />
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                For Organizers <ArrowRight size={14} />
               </span>
             </MagneticButton>
           </div>
 
-          <StoreBadges scheme="dark" className="hero-stagger mt-8" />
+          <StoreBadges scheme="dark" className="hero-stagger mt-4" />
         </div>
 
         {/* ══════════ RIGHT · two rounded photo panels + phone (desktop) ══════════ */}
