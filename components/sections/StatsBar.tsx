@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Users, CalendarDays, HeartHandshake, Star, Globe2 } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { STATS } from "@/lib/events";
@@ -21,44 +21,44 @@ const CHIP_TONES = [
   "bg-[var(--yaa-black)] text-[var(--yaa-lime)]",
 ];
 
-function formatValue(v: number) {
+function fmt(v: number) {
   return v >= 1000 ? v.toLocaleString("en-US") : String(v);
 }
 
+/**
+ * Count-up animation driven purely by rAF + IntersectionObserver.
+ * Uses NO useState → triggers zero parent re-renders → GSAP stagger stays intact.
+ */
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let raf = 0;
+
+    const run = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.textContent = fmt(target) + suffix;
+        return;
+      }
+      const dur = 1300;
+      const t0 = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = fmt(Math.round(target * (1 - (1 - p) * (1 - p)))) + suffix;
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    };
+
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect(); } },
+      ([e]) => { if (e.isIntersecting) { run(); obs.disconnect(); } },
       { threshold: 0.4 }
     );
     obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.textContent = formatValue(target) + suffix;
-      return;
-    }
-    let raf = 0;
-    const dur = 1300;
-    const t0 = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min((now - t0) / dur, 1);
-      el.textContent = formatValue(Math.round(target * (1 - (1 - p) * (1 - p)))) + suffix;
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [started, target, suffix]);
+    return () => { obs.disconnect(); cancelAnimationFrame(raf); };
+  }, [target, suffix]);
 
   return <span ref={ref} className="tabular-nums">0{suffix}</span>;
 }
@@ -66,17 +66,26 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 export function StatsBar() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef    = useRef<HTMLDivElement>(null);
+  const didAnimate = useRef(false); // guard: run GSAP only once
 
   useGSAP(() => {
-    const items = cardRef.current?.querySelectorAll(".stat-item");
+    if (didAnimate.current) return; // skip on re-runs from parent re-renders
+    didAnimate.current = true;
+
+    const items = cardRef.current?.querySelectorAll<HTMLElement>(".stat-item");
     if (!items?.length) return;
+
     gsap.from(items, {
       y: 20,
       opacity: 0,
-      duration: 0.6,
+      duration: 0.65,
       ease: "power3.out",
-      stagger: 0.08,
-      scrollTrigger: { trigger: cardRef.current, start: "top 82%", toggleActions: "play none none none" },
+      stagger: 0.09,
+      scrollTrigger: {
+        trigger: cardRef.current,
+        start: "top 84%",
+        toggleActions: "play none none none",
+      },
     });
   }, { scope: sectionRef });
 
@@ -91,7 +100,7 @@ export function StatsBar() {
           ref={cardRef}
           className="rounded-2xl border border-[var(--yaa-ink-08)] bg-[var(--yaa-white)] px-6 py-6 shadow-[0_8px_28px_var(--yaa-ink-08)] md:px-10 md:py-8"
         >
-          {/* 2 cols → 3 cols → flex row with dividers */}
+          {/* 2 cols → 3 cols (md) → flex row with dividers (lg) */}
           <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:flex lg:items-center lg:divide-x lg:divide-[var(--yaa-ink-08)]">
             {STATS.map((stat, i) => {
               const Icon = ICONS[stat.icon];
@@ -100,16 +109,16 @@ export function StatsBar() {
                   key={stat.label}
                   className="stat-item flex items-center gap-3 lg:flex-1 lg:px-6 first:lg:pl-0 last:lg:pr-0"
                 >
-                  {/* Compact icon chip */}
+                  {/* compact colour chip */}
                   <span
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${CHIP_TONES[i % CHIP_TONES.length]}`}
                   >
                     <Icon size={14} aria-hidden="true" />
                   </span>
 
-                  {/* Number + label stacked */}
+                  {/* number + label — explicit color to prevent any inheritance issue */}
                   <div className="min-w-0">
-                    <p className="font-display text-xl leading-none md:text-2xl">
+                    <p className="font-display text-xl leading-none text-[var(--yaa-black)] md:text-2xl">
                       <CountUp target={stat.value} suffix={stat.suffix} />
                     </p>
                     <p className="mt-0.5 truncate text-[10px] font-semibold uppercase tracking-widest text-[var(--yaa-ink-60)]">
