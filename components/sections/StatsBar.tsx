@@ -5,7 +5,6 @@ import { Users, CalendarDays, HeartHandshake, Star, Globe2 } from "lucide-react"
 import { gsap, useGSAP } from "@/lib/gsap";
 import { STATS } from "@/lib/events";
 
-/* ─── Icon map ─── */
 const ICONS = {
   users: Users,
   calendar: CalendarDays,
@@ -14,7 +13,6 @@ const ICONS = {
   globe: Globe2,
 } as const;
 
-/* ─── One colour per stat chip (lime → purple → red → cream → black) ─── */
 const CHIP_TONES = [
   "bg-[var(--yaa-lime)] text-[var(--yaa-black)]",
   "bg-[var(--yaa-purple)] text-[var(--yaa-off)]",
@@ -23,11 +21,10 @@ const CHIP_TONES = [
   "bg-[var(--yaa-black)] text-[var(--yaa-lime)]",
 ];
 
-function formatValue(value: number) {
-  return value >= 1000 ? value.toLocaleString("en-US") : String(value);
+function formatValue(v: number) {
+  return v >= 1000 ? v.toLocaleString("en-US") : String(v);
 }
 
-/** Viewport-aware count-up with rAF + power2.out easing (1.4 s). */
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [started, setStarted] = useState(false);
@@ -35,14 +32,12 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) { setStarted(true); observer.disconnect(); }
-      },
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect(); } },
       { threshold: 0.4 }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   useEffect(() => {
@@ -53,13 +48,12 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
       el.textContent = formatValue(target) + suffix;
       return;
     }
-    const duration = 1400;
     let raf = 0;
+    const dur = 1300;
     const t0 = performance.now();
     const tick = (now: number) => {
-      const p = Math.min((now - t0) / duration, 1);
-      const eased = 1 - (1 - p) * (1 - p); // power2.out
-      el.textContent = formatValue(Math.round(target * eased)) + suffix;
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = formatValue(Math.round(target * (1 - (1 - p) * (1 - p)))) + suffix;
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -71,24 +65,18 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
 export function StatsBar() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRef   = useRef<HTMLDivElement>(null);
+  const cardRef    = useRef<HTMLDivElement>(null);
 
-  /* GSAP stagger — each stat slides up on scroll enter */
   useGSAP(() => {
     const items = cardRef.current?.querySelectorAll(".stat-item");
     if (!items?.length) return;
-
     gsap.from(items, {
-      y: 36,
+      y: 20,
       opacity: 0,
-      duration: 0.75,
+      duration: 0.6,
       ease: "power3.out",
-      stagger: 0.09,
-      scrollTrigger: {
-        trigger: cardRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
+      stagger: 0.08,
+      scrollTrigger: { trigger: cardRef.current, start: "top 82%", toggleActions: "play none none none" },
     });
   }, { scope: sectionRef });
 
@@ -96,45 +84,35 @@ export function StatsBar() {
     <section
       ref={sectionRef}
       id="stats"
-      className="bg-[var(--yaa-white)] px-6 py-16 md:px-10 md:py-20"
+      className="bg-[var(--yaa-white)] px-6 py-10 md:px-10 md:py-12"
     >
       <div className="mx-auto max-w-[1200px]">
         <div
           ref={cardRef}
-          className={[
-            "rounded-[28px] border border-[var(--yaa-ink-08)]",
-            "bg-[var(--yaa-white)]",
-            "px-8 py-10 md:px-10 md:py-12",
-            "shadow-[0_20px_56px_var(--yaa-ink-08)]",
-          ].join(" ")}
+          className="rounded-2xl border border-[var(--yaa-ink-08)] bg-[var(--yaa-white)] px-6 py-6 shadow-[0_8px_28px_var(--yaa-ink-08)] md:px-10 md:py-8"
         >
-          {/*
-           * Layout:
-           *  mobile  → 2-column grid with row gaps
-           *  md      → 3-column grid
-           *  lg+     → single flex row with divide-x dividers
-           */}
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:flex lg:items-stretch lg:divide-x lg:divide-[var(--yaa-ink-08)]">
+          {/* 2 cols → 3 cols → flex row with dividers */}
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:flex lg:items-center lg:divide-x lg:divide-[var(--yaa-ink-08)]">
             {STATS.map((stat, i) => {
               const Icon = ICONS[stat.icon];
               return (
                 <div
                   key={stat.label}
-                  className="stat-item flex flex-col justify-center gap-3 lg:flex-1 lg:px-8 first:lg:pl-0 last:lg:pr-0"
+                  className="stat-item flex items-center gap-3 lg:flex-1 lg:px-6 first:lg:pl-0 last:lg:pr-0"
                 >
-                  {/* Coloured icon chip */}
+                  {/* Compact icon chip */}
                   <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${CHIP_TONES[i % CHIP_TONES.length]}`}
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${CHIP_TONES[i % CHIP_TONES.length]}`}
                   >
-                    <Icon size={18} aria-hidden="true" />
+                    <Icon size={14} aria-hidden="true" />
                   </span>
 
-                  {/* Number + label */}
-                  <div>
-                    <p className="font-display text-3xl leading-none md:text-4xl">
+                  {/* Number + label stacked */}
+                  <div className="min-w-0">
+                    <p className="font-display text-xl leading-none md:text-2xl">
                       <CountUp target={stat.value} suffix={stat.suffix} />
                     </p>
-                    <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--yaa-ink-60)]">
+                    <p className="mt-0.5 truncate text-[10px] font-semibold uppercase tracking-widest text-[var(--yaa-ink-60)]">
                       {stat.label}
                     </p>
                   </div>
