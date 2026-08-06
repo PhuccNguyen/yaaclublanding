@@ -63,18 +63,20 @@ export function Footer() {
           <div className="flex gap-3">
             {[
               { href: soonHref("Instagram"), label: "Instagram", Glyph: InstagramGlyph },
-              { href: soonHref("Facebook"), label: "Facebook", Glyph: FacebookGlyph },
-              { href: soonHref("X"), label: "X", Glyph: XGlyph },
-              { href: soonHref("YouTube"), label: "YouTube", Glyph: YoutubeGlyph },
+              { href: "https://www.facebook.com/YaaClub", label: "Facebook", Glyph: FacebookGlyph },
+              { href: "https://x.com/YaaClubApp", label: "X", Glyph: XGlyph },
+              { href: "https://www.youtube.com/@YaaClubApp", label: "YouTube", Glyph: YoutubeGlyph },
             ].map(({ href, label, Glyph }) => (
-              <Link
+              <a
                 key={label}
                 href={href}
                 aria-label={`Yaa Club on ${label}`}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--yaa-lime)] text-[var(--yaa-black)] transition-transform duration-300 hover:-translate-y-0.5"
               >
                 <Glyph />
-              </Link>
+              </a>
             ))}
           </div>
         </div>
