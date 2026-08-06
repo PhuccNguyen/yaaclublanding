@@ -73,7 +73,10 @@ export function MagneticButton({
     }
   }
 
-  const baseStyles = "magnetic-btn rounded-full px-4 py-2.5 text-[11px] tracking-widest lg:px-8 lg:py-4 lg:text-sm font-display tracking-wide uppercase transition-colors";
+  /* inline-flex here (not via a stylesheet class) so callers can override
+     width/alignment with utilities such as `w-full!`. */
+  const baseStyles =
+    "magnetic-btn relative inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[11px] tracking-widest lg:px-8 lg:py-4 lg:text-sm font-display tracking-wide uppercase transition-colors will-change-transform";
   
   const variantStyles = {
     filled: "bg-[var(--yaa-black)] text-[var(--yaa-cream)]",

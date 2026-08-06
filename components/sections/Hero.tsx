@@ -63,11 +63,18 @@ export function Hero() {
             ease: "power4.out",
             delay: 0.1,
           });
-          /* Lime highlight sweeps in behind the word */
+          /* Lime highlight sweeps in behind both accent lines */
           gsap.fromTo(
             ".hero-highlight",
             { scaleX: 0 },
-            { scaleX: 1, duration: 0.7, ease: "power4.out", delay: 0.8, transformOrigin: "left center" }
+            {
+              scaleX: 1,
+              duration: 0.7,
+              stagger: 0.09,
+              ease: "power4.out",
+              delay: 0.75,
+              transformOrigin: "left center",
+            }
           );
         });
 
@@ -114,20 +121,27 @@ export function Hero() {
       {/* Grain wash */}
       <span className="pointer-events-none absolute inset-0 z-0 opacity-[0.06] mix-blend-multiply [background-image:radial-gradient(var(--yaa-black)_0.5px,transparent_0.5px)] [background-size:4px_4px]" />
 
-      <div className="mx-auto grid w-full max-w-[1660px] items-center gap-10 px-6 pb-14 pt-6 md:px-10 lg:min-h-[calc(100svh-76px)] lg:grid-cols-[37%_63%] lg:gap-12 lg:pb-8 lg:pt-0 xl:px-14">
+      <div className="mx-auto grid w-full max-w-[1660px] items-center gap-10 px-6 pb-14 pt-6 md:px-10 lg:min-h-[calc(100svh-76px)] lg:grid-cols-[40fr_60fr] lg:gap-12 lg:pb-8 lg:pt-0 xl:px-14">
         {/* ══════════ LEFT · text ══════════ */}
-        <div className="max-w-[560px]">
-          <p className="eyebrow hero-stagger mb-6 text-[var(--yaa-ink-60)]">
+        {/* container-type lets the headline scale off THIS column's width, so the
+            three lines never wrap — on iPhone, iPad or desktop alike. */}
+        <div className="max-w-[620px] [container-type:inline-size]">
+          <p className="eyebrow hero-stagger mb-5 text-[var(--yaa-ink-60)] sm:mb-6">
             Yaa Club · Wellbeing that works
           </p>
 
           <h1
             ref={headlineRef}
-            className="font-display text-[clamp(42px,5vw,74px)] uppercase opacity-0"
+            className="font-display text-[clamp(24px,9.6cqw,64px)] uppercase opacity-0"
           >
-            <span className="block">More than a game,</span>
+            <span className="block whitespace-nowrap">More than a game,</span>
             <span className="block">
-              it&apos;s a{" "}
+              <span className="relative inline-block whitespace-nowrap">
+                <span className="hero-highlight absolute inset-x-[-2%] inset-y-[10%] z-0 block bg-[var(--yaa-lime)]" />
+                <span className="relative z-10">it&apos;s a</span>
+              </span>
+            </span>
+            <span className="block">
               <span className="relative inline-block whitespace-nowrap">
                 <span className="hero-highlight absolute inset-x-[-2%] inset-y-[10%] z-0 block bg-[var(--yaa-lime)]" />
                 <span className="relative z-10">community</span>
@@ -140,10 +154,14 @@ export function Hero() {
             organize events, all in one place.
           </p>
 
-          <div className="hero-stagger mt-9">
-            <MagneticButton variant="dark" href="#download">
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                Download the App <Download size={16} />
+          <div className="hero-stagger mt-8 sm:mt-9">
+            <MagneticButton
+              variant="dark"
+              href="#download"
+              className="w-full! justify-center px-8! py-5! text-base! shadow-[0_16px_36px_rgba(10,10,10,0.28)] sm:w-auto! sm:py-4! sm:text-sm!"
+            >
+              <span className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                Download the App <Download size={20} className="sm:size-4" />
               </span>
             </MagneticButton>
           </div>

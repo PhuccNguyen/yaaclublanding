@@ -31,12 +31,13 @@ export function Nav() {
           <Logo variant="standard" orientation="horizontal" height={48} priority />
         </a>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        {/* nowrap + tighter gaps at lg keep the bar on ONE line down to 1024px */}
+        <ul className="hidden items-center gap-4 lg:flex xl:gap-7">
           {NAV_LINKS.map((link) => (
-            <li key={link.label}>
+            <li key={link.label} className="shrink-0">
               <Link
                 href={link.href}
-                className="nav-link text-sm font-medium text-[var(--yaa-black)]"
+                className="nav-link whitespace-nowrap text-[13px] font-medium text-[var(--yaa-black)] xl:text-sm"
               >
                 {link.label}
               </Link>
@@ -44,14 +45,19 @@ export function Nav() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-2.5 lg:flex xl:gap-3">
           <Link
             href={soonHref("Log in")}
-            className="rounded-full border border-[var(--yaa-ink-15)] px-5 py-2.5 text-sm font-medium text-[var(--yaa-black)] transition-colors duration-300 hover:border-[var(--yaa-black)]"
+            className="whitespace-nowrap rounded-full border border-[var(--yaa-ink-15)] px-4 py-2.5 text-[13px] font-medium text-[var(--yaa-black)] transition-colors duration-300 hover:border-[var(--yaa-black)] xl:px-5 xl:text-sm"
           >
             Log in
           </Link>
-          <MagneticButton variant="lime" magnetRadius={140} href="#download" className="!px-6 !py-2.5 !text-xs">
+          <MagneticButton
+            variant="lime"
+            magnetRadius={140}
+            href="#download"
+            className="whitespace-nowrap px-5! py-2.5! text-[11px]! xl:px-6! xl:text-xs!"
+          >
             Get Started
           </MagneticButton>
         </div>
