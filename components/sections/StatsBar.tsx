@@ -127,7 +127,7 @@ export function StatsBar() {
                 return (
                   <div
                     key={stat.label}
-                    className="stat-item flex items-center gap-3 lg:flex-1 lg:px-6 first:lg:pl-0 last:lg:pr-0"
+                    className="stat-item flex items-center gap-3 lg:flex-1 lg:justify-center lg:px-4"
                   >
                     {/* Compact colour chip */}
                     <span

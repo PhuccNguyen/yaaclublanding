@@ -198,9 +198,12 @@ body {
 
 /* ═══════════ Nav underline (grow from left) ═══════════ */
 
+/* inline-flex (not inline-block) so links that pair a label with an icon stay
+   on one line; the grow-from-left underline below works the same either way. */
 .nav-link {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link::after {

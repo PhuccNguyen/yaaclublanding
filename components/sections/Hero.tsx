@@ -2,10 +2,9 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { Download } from "lucide-react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { MagneticButton } from "@/components/layout/MagneticButton";
-import { StoreBadges } from "@/components/ui/StoreBadges";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
 import { Pill } from "@/components/ui/Pill";
 import { Tilt } from "@/components/ui/Tilt";
@@ -64,6 +63,7 @@ export function Hero() {
             ease: "power4.out",
             delay: 0.1,
           });
+          /* Lime highlight sweeps in behind the word */
           gsap.fromTo(
             ".hero-highlight",
             { scaleX: 0 },
@@ -130,7 +130,7 @@ export function Hero() {
               it&apos;s a{" "}
               <span className="relative inline-block whitespace-nowrap">
                 <span className="hero-highlight absolute inset-x-[-2%] inset-y-[10%] z-0 block bg-[var(--yaa-lime)]" />
-                <span className="relative z-10">community.</span>
+                <span className="relative z-10">community</span>
               </span>
             </span>
           </h1>
@@ -140,20 +140,13 @@ export function Hero() {
             organize events, all in one place.
           </p>
 
-          <div className="hero-stagger mt-9 flex flex-nowrap items-center gap-3">
-            <MagneticButton variant="lime" href="#events">
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                Explore Clubs <ArrowRight size={14} />
-              </span>
-            </MagneticButton>
-            <MagneticButton variant="ghost" href="#roles">
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                For Organizers <ArrowRight size={14} />
+          <div className="hero-stagger mt-9">
+            <MagneticButton variant="dark" href="#download">
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                Download the App <Download size={16} />
               </span>
             </MagneticButton>
           </div>
-
-          <StoreBadges scheme="dark" className="hero-stagger mt-4" />
         </div>
 
         {/* ══════════ RIGHT · two rounded photo panels + phone (desktop) ══════════ */}

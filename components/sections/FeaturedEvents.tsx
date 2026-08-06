@@ -85,9 +85,9 @@ export function FeaturedEvents() {
           </h2>
           <Link
             href={soonHref("All Events")}
-            className="nav-link inline-flex items-center gap-2 text-sm font-semibold"
+            className="nav-link inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-semibold"
           >
-            View all events <ArrowRight size={16} />
+            View all events <ArrowRight size={16} className="shrink-0" />
           </Link>
         </Reveal>
 

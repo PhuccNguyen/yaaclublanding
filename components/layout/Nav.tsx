@@ -28,7 +28,7 @@ export function Nav() {
     >
       <nav className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-6 md:px-10">
         <a href="#top" aria-label="Yaa Club home" className="shrink-0">
-          <Logo variant="standard" orientation="horizontal" height={40} priority />
+          <Logo variant="standard" orientation="horizontal" height={48} priority />
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">

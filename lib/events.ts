@@ -35,7 +35,7 @@ export const FEATURED_EVENTS: YaaEvent[] = [
     title: "City Long Run 12K",
     category: "Run Club",
     categoryColor: "red",
-    image: IMAGES.evtRun,
+    image: IMAGES.evtRunCard,
     date: "Sun, Jul 27",
     time: "5:30 AM",
     venue: "Riverside Loop, D1",

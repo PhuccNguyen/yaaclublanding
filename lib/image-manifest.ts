@@ -15,8 +15,10 @@ export const IMAGES = {
   evtYoga: "/images/sunset-yoga-flow.jpg",
   evtHoops: "/images/evening-hoops.jpg",
   evtFootball: "/images/friday-night-football.jpg",
-  ctaBanner: "/images/cta-01-hoop--branded.jpg",
+  ctaBanner: "/images/_library/387.87x167.87.png",
   comingSoonBg: "/images/coming-soon-bg.jpg",
+  /* Brand-supplied artwork used directly in cards. */
+  evtRunCard: "/images/_library/254x178.png",
 } as const;
 
 export const LOGOS = {

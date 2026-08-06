@@ -5,7 +5,7 @@ import { gsap } from "@/lib/gsap";
 
 interface MagneticButtonProps {
   children: ReactNode;
-  variant?: "filled" | "ghost" | "lime";
+  variant?: "filled" | "ghost" | "lime" | "dark";
   magnetRadius?: number;
   className?: string;
   href?: string;
@@ -79,6 +79,8 @@ export function MagneticButton({
     filled: "bg-[var(--yaa-black)] text-[var(--yaa-cream)]",
     ghost: "bg-transparent border-2 border-[var(--yaa-black)] text-[var(--yaa-black)] hover:bg-[var(--yaa-black)] hover:text-[var(--yaa-cream)]",
     lime: "bg-[var(--yaa-lime)] text-[var(--yaa-black)]",
+    /* Inverted lime: black fill, neon-lime label. */
+    dark: "bg-[var(--yaa-black)] text-[var(--yaa-lime)]",
   };
 
   const Tag = href ? "a" : "button";

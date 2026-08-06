@@ -56,7 +56,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:px-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
         {/* Column 1: brand */}
         <div className="flex flex-col items-start gap-5">
-          <Logo variant="lime" height={112} />
+          <Logo variant="inverted" orientation="horizontal" height={64} />
           <p className="max-w-[230px] text-sm leading-relaxed text-[var(--yaa-cream)]/70">
             More than a game, it&apos;s a community.
           </p>
