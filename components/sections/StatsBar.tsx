@@ -149,6 +149,11 @@ export function StatsBar() {
                 );
               })}
             </div>
+
+            {/* Honesty note: these figures are illustrative, not live metrics. */}
+            <p className="mt-4 text-right text-[10px] italic text-[var(--yaa-ink-60)]">
+              Demo data
+            </p>
           </div>
         </div>
       </section>

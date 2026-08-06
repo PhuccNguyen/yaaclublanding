@@ -1,5 +1,4 @@
 import { LenisProvider } from "@/lib/lenis";
-import { Cursor } from "@/components/ui/Cursor";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -13,7 +12,6 @@ import { BigCTA } from "@/components/sections/BigCTA";
 export default function Home() {
   return (
     <LenisProvider>
-      <Cursor />
       <GrainOverlay />
       <Nav />
       <main id="top" className="bg-[var(--yaa-white)]">

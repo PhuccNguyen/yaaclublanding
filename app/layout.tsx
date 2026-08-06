@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
+import { Cursor } from "@/components/ui/Cursor";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -47,6 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${interTight.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-[var(--yaa-cream)] text-[var(--yaa-black)]">
+        {/* Global: the CSS hides the native cursor everywhere, so the custom one
+            must exist on every route (not just the landing page). */}
+        <Cursor />
         {children}
       </body>
     </html>

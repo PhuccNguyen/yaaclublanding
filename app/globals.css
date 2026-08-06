@@ -168,26 +168,27 @@ body {
 
 /* ═══════════ Custom cursor ═══════════ */
 
+/* Brand-cream dot in `difference` blend: it inverts against whatever is behind
+   it, so it stays visible on cream, white, lime AND the black footer / CTA /
+   coming-soon sections. A solid dark dot disappeared on the dark sections. */
 .custom-cursor {
   position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--yaa-black);
+  width: 10px;
+  height: 10px;
+  background: var(--yaa-cream);
+  mix-blend-mode: difference;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition:
     width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .custom-cursor.hover {
   width: 48px;
   height: 48px;
-  background: var(--yaa-cream);
-  mix-blend-mode: difference;
 }
 
 @media (pointer: coarse) {

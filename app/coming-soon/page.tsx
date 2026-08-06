@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   description: "This part of Yaa Club is in training. Check back soon.",
 };
 
+/* X (Twitter) mark — this lucide build ships no social logos. */
+function XGlyph() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.1L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z" />
+    </svg>
+  );
+}
+
 const KNOWN: Record<string, string> = {
   Communities: "Find your people. Clubs, crews and communities for every sport are almost here.",
   "List a Venue": "Turn your courts into a clubhouse. Venue tools are warming up.",
@@ -60,29 +69,37 @@ export default async function ComingSoon({
       </header>
 
       {/* Centered content */}
-      <section className="relative z-10 mx-auto flex w-full max-w-[760px] flex-1 flex-col items-center justify-center px-5 pb-24 text-center">
-        <span className="eyebrow mb-6 rounded-full bg-[var(--yaa-lime)] px-4 py-1.5 text-[var(--yaa-black)]">
+      <section className="relative z-10 mx-auto flex w-full max-w-[900px] flex-1 flex-col items-center justify-center px-5 pb-24 text-center">
+        {/* "COMING SOON" is the headline; the page name sits below it */}
+        <h1 className="font-display text-[clamp(46px,10vw,118px)] uppercase leading-[0.88]">
           Coming soon
-        </span>
-        <h1 className="font-display text-[clamp(44px,8vw,104px)] uppercase leading-[0.92]">
-          {title}
         </h1>
+        <span className="eyebrow mt-6 rounded-full bg-[var(--yaa-lime)] px-4 py-1.5 text-[var(--yaa-black)]">
+          {title}
+        </span>
         <p className="mt-6 max-w-[520px] text-base leading-relaxed text-[var(--yaa-cream)]/75">
           {copy}
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <p className="mt-10 max-w-[460px] text-sm leading-relaxed text-[var(--yaa-cream)]/75">
+          Follow us for the latest updates on the app and to connect with the
+          community.
+        </p>
+
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="https://x.com/YaaClubApp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--yaa-lime)] px-7 py-3.5 text-sm font-semibold text-[var(--yaa-black)] transition-transform duration-300 hover:-translate-y-0.5"
+          >
+            <XGlyph /> Follow us on X
+          </a>
           <Link
             href="/#download"
-            className="rounded-full bg-[var(--yaa-lime)] px-7 py-3.5 text-sm font-semibold text-[var(--yaa-black)] transition-transform duration-300 hover:-translate-y-0.5"
-          >
-            Get the app
-          </Link>
-          <Link
-            href="/#events"
             className="rounded-full border border-[var(--yaa-cream)]/40 px-7 py-3.5 text-sm font-semibold transition-colors hover:border-[var(--yaa-lime)] hover:text-[var(--yaa-lime)]"
           >
-            Browse events
+            Get the app
           </Link>
         </div>
       </section>
