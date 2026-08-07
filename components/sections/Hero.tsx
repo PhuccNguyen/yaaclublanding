@@ -157,7 +157,7 @@ export function Hero() {
           <div className="hero-stagger mt-8 sm:mt-9">
             <MagneticButton
               variant="dark"
-              href="#download"
+              href="/download"
               className="w-full! justify-center px-8! py-5! text-base! shadow-[0_16px_36px_rgba(10,10,10,0.28)] sm:w-auto! sm:py-4! sm:text-sm!"
             >
               <span className="inline-flex items-center gap-2.5 whitespace-nowrap">

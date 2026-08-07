@@ -29,7 +29,10 @@ const KNOWN: Record<string, string> = {
   Careers: "Build the future of community sport with us. Roles posting soon.",
   Blog: "Field notes on play, community and wellbeing. Publishing shortly.",
   "Contact Us": "We would love to hear from you. This channel opens soon.",
+  "App Store": "Yaa Club on iOS is almost here. Follow us on X to be the first to download when we launch.",
+  "Google Play": "Yaa Club on Android is almost here. Follow us on X to be the first to download when we launch.",
 };
+
 
 export default async function ComingSoon({
   searchParams,
